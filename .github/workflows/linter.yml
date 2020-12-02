@@ -1,22 +1,11 @@
-name: Run Lint checks on PR
-on:
-  pull_request:
-    branches: [master]
+name: CI
+on: push
 jobs:
   build:
-    name: Lint and sanitize code base
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Run Linter
-        uses: github/super-linter@v3
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: /
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
-          VALIDATE_TYPESCRIPT_ES: true
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
+        run: eslint . --ext .js,.jsx,.ts,.tsx
