@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 
 const app: Application = express();
 
-const j = 'hello';
+const j = 'hell';
 
 app.use('/', (req, res) => {
   res.send('Hello welcome');
